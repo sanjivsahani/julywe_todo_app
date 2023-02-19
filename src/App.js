@@ -1,24 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './compoent/Header/Navbar';
+import SignUp from './compoent/Body/SignUp';
+import Login from './compoent/Body/Login';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Home from './compoent/Body/Home';
+import Addtodo from './compoent/TodoApp/Addtodo';
 
 function App() {
+  const [refreshtoken, setrefreshToken] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        {refreshtoken? <Navbar setrefreshToken = {setrefreshToken} /> : ""}
+        <Routes>
+          <Route path="/" element={<Login setrefreshToken ={setrefreshToken} />} />
+          <Route path="/signup" element={<SignUp setrefreshToken ={setrefreshToken}/>} />
+          <Route path="/home" element={<Home/>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
